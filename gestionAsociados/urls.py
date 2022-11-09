@@ -21,5 +21,6 @@ from registroAsociado import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('registroAsociado.urls'), name='asociados'),
+    #path('referencias/',views.refereciasForm),
     path('inicioSesion/',views.inicioSesion)
 ]
