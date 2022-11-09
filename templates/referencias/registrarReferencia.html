@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block links %}
 <!-- Bootstrap select CSS -->
 <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
@@ -7,25 +8,48 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
 {% endblock %}
 {% block content %}
-<title>Registrar Referencias</title>     
-        <h1 style=" text-align: center;">Registro Referencias/h1>
-        
-    <div  class="d-inline-flex pl-5">
-
-    <form style="position: absolute;right:43%" method="post">
-      {%csrf_token%}
-
-      {{form.as_table}}
-<br>
-<div class="input-group mb-3" style=" text-align: center;"class="d-inline-flex pl-5 flex-column d-flex align-items-center" >
-  <br>
-   <button style=" text-align: center;" type="submit" class="btn btn-primary">Registrar</button>
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<a class="btn btn-danger" href="{%url 'verCliente'%}">Salir</a>
- </div>
-
-</form>
+<title>Registrar Beneficiario</title>     
+      <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Registro de Referencias</h1>
+                <p class="lead font-italic">Formulario utilizado para el registro de los referencias </p>
+                <hr class="my-4">
+                <form style="position: center;" method="post">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-6">
+                        {{form.nombreReferencia|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.telReferencia|as_crispy_field}}   
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        {{form.correoReferencia|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.tipoReferencia|as_crispy_field}}   
+                    </div>
+                  </div>
+                  <br>
+                  <div class="input-group mb-3" style=" text-align: center;"class="d-inline-flex pl-5 flex-column d-flex align-items-center" >
+                      <br>
+                      <button style=" text-align: center;" type="submit" class="btn btn-primary">Siguiente</button>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <a class="btn btn-danger" href="{%url 'verCliente'%}">Salir</a>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+      
 
 </div>
 
 {% endblock %}
+    
+
+
+

@@ -8,41 +8,35 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/custom.css' %}">
 {% endblock %}
 {% block content %}
-<title>Registrar Beneficiario</title>     
+<title>Registrar Asociacion</title>     
       <div class="container">
         <div class="col-md-10 offset-md-1 mt-5">
             <div class="jumbotron">
-                <h1 class="display-4">Registro de beneficiarios</h1>
-                <p class="lead font-italic">Formulario utilizado para el registro de los beneficiarios </p>
+                <h1 class="display-4">Registro de solicitud de asociacion</h1>
+                <p class="lead font-italic">Formulario utilizado para el registro de Registro de solicitud de asociacion </p>
                 <hr class="my-4">
                 <form style="position: center;" method="post">
                   {% csrf_token %}
                   <div class="row">
                     <div class="col-md-6">
-                        {{form.nombreBeneficiario|as_crispy_field}}
+                        {{form.fechaAsociacion|as_crispy_field}}
                     </div>
                     <div class="col-md-6">
-                        {{form.apellidoBeneficiario|as_crispy_field}}   
+                        {{form.lugarAsociacion|as_crispy_field}}   
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-3">
-                        {{form.telBeneficiario|as_crispy_field}}
+                    <div class="col-md-6">
+                        {{form.estadoAsociacion|as_crispy_field}}
                     </div>
-                    <div class="col-md-3">
-                        {{form.edadBeneficiario|as_crispy_field}}   
-                    </div>
-                    <div class="col-md-3">
-                        {{form.parenscoBeneficiario|as_crispy_field}}   
-                    </div>
-                    <div class="col-md-3">
-                        {{form.porcentajeBeneficiario|as_crispy_field}}   
+                    <div class="col-md-6">
+                        {{form.ejecutivo_idEjecutivo|as_crispy_field}}   
                     </div>
                   </div>
                   <br>
                   <div class="input-group mb-3" style=" text-align: center;"class="d-inline-flex pl-5 flex-column d-flex align-items-center" >
                       <br>
-                      <button style=" text-align: center;" type="submit" class="btn btn-primary">Siguiente</button>
+                      <button style=" text-align: center;" type="submit" class="btn btn-primary">Generar contrato</button>
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     <a class="btn btn-danger" href="{%url 'verCliente'%}">Salir</a>
                   </div>

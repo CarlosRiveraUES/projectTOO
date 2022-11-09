@@ -54,14 +54,20 @@ class ejecutivo(models.Model):
         managed = True
         db_table = 'ejecutivo'
     def __str__(self):
-        return f'{self.idEjecutivo}'
+        return f'{self.nombreEjecutivo}'
 
 # Create your models here.
 class asociacion(models.Model):
     idAsociado = models.AutoField(primary_key=True)
     fechaAsociacion = models.CharField(max_length=50)
     lugarAsociacion = models.CharField(max_length=100)
-    estadoAsociacion = models.CharField(max_length=100, null=True)
+    ESTADO= (
+        ('1', 'Espera de pago'),
+        ('2', 'Verificacion de solicitud'),
+        ('3', 'Aprobado'),
+        ('4', 'Rechazado'),
+    )
+    estadoAsociacion = models.CharField(max_length=100, choices=ESTADO, null=True)
     cliente_idCliente = models.ForeignKey(cliente, null=True, on_delete= models.CASCADE)
     ejecutivo_idEjecutivo= models.ForeignKey(ejecutivo, on_delete=models.CASCADE)
 
@@ -82,7 +88,7 @@ class tipoDocumento(models.Model):
         managed = True
         db_table = 'tipoDocumento'
     def __str__(self):
-        return f'{self.idTipoDocumento}'
+        return f'{self.nombreDocumento}'
 
 #Tabla actividad economica
 class tipoActEconomica(models.Model):
@@ -94,7 +100,7 @@ class tipoActEconomica(models.Model):
         managed = True
         db_table = 'tipoActEconomica'
     def __str__(self):
-        return f'{self.idTipoActEconomica}'
+        return f'{self.nombreActEconomica}'
 
 #Tabla Catalogo de profeciones
 class catalogoProfesiones(models.Model):
@@ -105,7 +111,7 @@ class catalogoProfesiones(models.Model):
         managed = True
         db_table = 'catalogoProfesiones'
     def __str__(self):
-        return f'{self.idCatalogoProfesiones}'
+        return f'{self.nombreProfesion}'
 
 #Tabla beneficiario
 

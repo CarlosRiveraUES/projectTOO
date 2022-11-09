@@ -53,8 +53,8 @@
             <td>{{cliente.estadoCivil}}</td>
             <td>{{cliente.genero_idGenero}}</td>
             <td>
-            <a href="{%url 'updateCliente' cliente.idCliente%}" class="btn btn-outline-warning"><i class="material-icons">edit</i></a>
-            <a href="{%url 'updateCliente' cliente.idCliente%}" class="btn btn-outline-warning"><i class="material-icons"></i>Beneficiarios</a>
+              <a href="{%url 'updateCliente' cliente.idCliente%}"  class="btn btn-outline-warning"><i class="material-icons">edit</i></a>
+              <a class="btn btn-secondary" href="{%url 'generarContrato' cliente.idCliente%}"  ><i class="material-icons">description</i></a>  
             </td>
             </tr>
             
