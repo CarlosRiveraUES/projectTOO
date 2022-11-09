@@ -110,3 +110,13 @@ def inicioSesion(request):
 	return render(request,'inicioSesion/inicioSesion.html',{
 		'inicio' : UserCreationForm
 	})
+
+def crearReferencia(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			form.save()
+		return render(request, 'referencias/referencias.html', {'form':form})
+	return render(request, 'referencias/referencias.html', {'form':form})
