@@ -107,3 +107,33 @@ class trabajosForm(forms.ModelForm):
           'catalogoProfesiones_idcatalogoProfesiones': forms.Select(attrs={'class': 'form-control'}),
           'tipoActEconomica_idTipoActEconomica': forms.Select(attrs={'class': 'form-control'}),
         }
+
+class documentosForm(forms.ModelForm):
+    class Meta:
+        model = catalogoDocumentos
+        fields = ['numDocumento', 'tipoDocumento_idTipoDocumento']
+        labels = {
+            'numDocumento': 'Numero de documento:',
+            'tipoDocumento_idTipoDocumento': 'Tipo de documento:',
+        }
+        widgets = {
+          'numDocumento': forms.TextInput(attrs={'class': 'form-control'}),
+          'tipoDocumento_idTipoDocumento': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+class asociacionForm(forms.ModelForm):
+    class Meta:
+        model = asociacion
+        fields = ['fechaAsociacion', 'lugarAsociacion', 'estadoAsociacion', 'ejecutivo_idEjecutivo']
+        labels = {
+            'fechaAsociacion': 'Fecha de solicitud:',
+            'lugarAsociacion': 'Lugar de solicitud:',
+            'estadoAsociacion': 'Estado del asociado:',
+            'ejecutivo_idEjecutivo': 'Ejecutivo:',
+        }
+        widgets = {
+          'fechaAsociacion': forms.TextInput(attrs={'class': 'form-control'}),
+          'lugarAsociacion': forms.TextInput(attrs={'class': 'form-control'}),
+          'estadoAsociacion': forms.Select(attrs={'class': 'form-control'}),
+          'ejecutivo_idEjecutivo': forms.Select(attrs={'class': 'form-control'}),
+        }
