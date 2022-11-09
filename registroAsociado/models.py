@@ -243,3 +243,4 @@ class actaAsociado (models.Model):
         db_table = 'actaAsociado'
     def _str_(self):
         return f'{self.idActaAsociado}'
+        

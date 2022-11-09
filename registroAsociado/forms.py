@@ -75,3 +75,20 @@ class beneficiariosForm(forms.ModelForm):
           'parenscoBeneficiario': forms.Select(attrs={'class': 'form-control'}),
           'porcentajeBeneficiario': forms.TextInput(attrs={'class': 'form-control'})
         }
+
+class refereciasForm(forms.ModelForm):
+    class Meta:
+        model = referencias
+        fields = ['nombreReferencia', 'telReferencia', 'correoReferencia', 'tipoReferencia']
+        labels = {
+            'nombreReferencia': 'Nombre:',
+            'telReferencia': 'Telefono:',
+            'correoReferencia': 'Correo Referencia:',
+            'tipoReferencia': 'Tipo de Referenca:',
+        }
+        widgets = {
+          'nombreReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'telReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'correoReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'tipoReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+        }

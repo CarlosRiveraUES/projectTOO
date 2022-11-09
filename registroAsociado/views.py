@@ -41,14 +41,14 @@ def UpdateEjecutivo(request, ejecutivoID):
 
 def crearCliente(request):	
 	if request.method == 'GET':
-		form = clienteForm()
+		form1 = clienteForm()
 	else:
-		form = clienteForm(request.POST)
-		if form.is_valid():			
-			client = form.save()
+		form1 = clienteForm(request.POST)
+		if form1.is_valid():			
+			client = form1.save()
 			return redirect('crearBeneficiario',client.idCliente)
 		return redirect('registrarCliente')
-	return render(request, 'clientes/registrarCliente.html', {'form':form})
+	return render(request, "clientes/registrarCliente.html", {'form': form1})
 
 def ListCliente(request):
 	if request.method =='GET':
@@ -79,8 +79,32 @@ def crearBeneficiario(request, idCliente):
 			obj3 = form.save(commit=False)
 			obj3.clienteBeneficiario = cliente.objects.get(pk=idCliente)
 			form.save()
-		return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
+		return redirect('crearBeneficiario2',idCliente)
 	return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
+
+def crearBeneficiario2(request, idCliente):	
+	if request.method == 'GET':
+		form = beneficiariosForm()
+	else:
+		form = beneficiariosForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.clienteBeneficiario = cliente.objects.get(pk=idCliente)
+			form.save()
+		return redirect('crearReferencias',idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
+
+def crearReferencias(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente3 = cliente.objects.get(pk=idCliente)
+			form.save()
+		return redirect('crearReferencias',idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
 
 def inicioSesion(request):
 	return render(request,'inicioSesion/inicioSesion.html',{
