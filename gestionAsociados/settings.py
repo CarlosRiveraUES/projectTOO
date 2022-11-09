@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registroAsociado',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -87,9 +88,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gestionAsociados',
-        'USER':'admin',
-        'PASSWORD':'12345',
-        'HOST':'localhost',
+        'USER':'root',
+        'PASSWORD':'root',
+        'HOST':'127.0.0.1',
         'PORT':'3306',
     }
 }

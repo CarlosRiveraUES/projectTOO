@@ -6,7 +6,10 @@ from django.db import models
 
 class genero(models.Model):
     idGenero = models.AutoField(primary_key=True)
+    # Por sno funciona lo de abajo esta la linea 36
+    # nombreGenero = models.CharField(max_length=8, unique=True)
     nombreGenero = models.CharField(max_length=10)
+        
     class Meta:
         managed = True
         db_table = 'genero'
@@ -58,8 +61,10 @@ class asociacion(models.Model):
     idAsociado = models.AutoField(primary_key=True)
     fechaAsociacion = models.CharField(max_length=50)
     lugarAsociacion = models.CharField(max_length=100)
+    estadoAsociacion = models.CharField(max_length=100, null=True)
     cliente_idCliente = models.ForeignKey(cliente, null=True, on_delete= models.CASCADE)
     ejecutivo_idEjecutivo= models.ForeignKey(ejecutivo, on_delete=models.CASCADE)
+
     class Meta:
         managed = True
         db_table = 'asociacion'
@@ -69,7 +74,10 @@ class asociacion(models.Model):
 # Tabla tipo documento
 class tipoDocumento(models.Model):
     idTipoDocumento = models.AutoField(primary_key=True)
+    # Por sno funciona lo de abajo esta la linea 52
+    # nombreDocumento = models.CharField(max_length=10, unique=True)
     nombreDocumento = models.CharField(max_length=50)
+        
     class Meta:
         managed = True
         db_table = 'tipoDocumento'
@@ -86,7 +94,7 @@ class tipoActEconomica(models.Model):
         managed = True
         db_table = 'tipoActEconomica'
     def __str__(self):
-        return f'{self.idTipoActEconomica}'
+        return f'{self.nombreActEconomica}'
 
 #Tabla Catalogo de profeciones
 class catalogoProfesiones(models.Model):
@@ -97,9 +105,10 @@ class catalogoProfesiones(models.Model):
         managed = True
         db_table = 'catalogoProfesiones'
     def __str__(self):
-        return f'{self.idCatalogoProfesiones}'
+        return f'{self.nombreProfesion}'
 
 #Tabla beneficiario
+
 class beneficiario(models.Model):
     idBeneficiario = models.AutoField(primary_key=True)
     nombreBeneficiario= models.CharField(max_length=50)
@@ -170,3 +179,68 @@ class referencias(models.Model):
         db_table = 'referencias'
     def __str__(self):
         return f'{self.idReferenciaCliente}'
+
+#recibo
+class recibo(models.Model):
+    idRecibo = models.AutoField(primary_key=True)
+    fechaPago = models.CharField(max_length=100)
+    montoPago = models.FloatField()
+    asociacio_idRecibo = models.ForeignKey(asociacion, on_delete=models.CASCADE)
+
+    class Meta:
+        managed = True
+        db_table = 'recibo'
+    def __str__(self):
+        return f'{self.idRecibo}'
+
+class usuario(models.Model):
+    idUsuario = models.AutoField(primary_key=True)
+    correo = models.CharField(max_length=100)
+    contrasena = models.CharField(max_length=50)
+    usuarioCliente = models.ForeignKey(cliente, on_delete=models.CASCADE)    
+
+    class Meta:
+        managed = True
+        db_table = 'usuario'
+    def _str_(self):
+        return f'{self.idUsuario}'
+
+class cuentaAportaciones(models.Model):
+    idcuentaAportaciones = models.AutoField(primary_key=True)
+    cuotaMensual = models.FloatField()
+    fechaAportacion = models.CharField(max_length=50)
+    aportacionesAsociacion = models.ForeignKey(asociacion, on_delete=models.CASCADE)    
+
+    class Meta:
+        managed = True
+        db_table = 'cuentaAportaciones'
+    def _str_(self):
+        return f'{self.idcuentaAportaciones}'
+
+class cuentaAhorros(models.Model):
+    idCuentaAhorros = models.AutoField(primary_key=True)
+    numCuentaAhorros = models.IntegerField()
+    saldoActual = models.FloatField()
+    movimientoAbonoRetiro = models.FloatField()
+    saldoAnterior = models.FloatField()
+    ahorrosAsociacion = models.ForeignKey(asociacion, on_delete=models.CASCADE)    
+
+    class Meta:
+        managed = True
+        db_table = 'cuentaAhorros'
+    def _str_(self):
+        return f'{self.idCuentaAhorros}'
+
+class actaAsociado (models.Model):
+    idActaAsociado = models.AutoField(primary_key=True)
+    firmaPresidente = models.CharField(max_length=100)
+    firmaSecretaria= models.CharField(max_length=100)
+    numActa = models.IntegerField()
+    fechaActa = models.DateField() 
+
+    class Meta:
+        managed = True
+        db_table = 'actaAsociado'
+    def _str_(self):
+        return f'{self.idActaAsociado}'
+        

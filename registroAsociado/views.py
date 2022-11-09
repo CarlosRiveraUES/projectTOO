@@ -4,6 +4,8 @@ from django.urls import reverse_lazy, reverse
 from registroAsociado.forms import *
 from django.views.generic import ListView, CreateView
 from datetime import datetime
+from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 def crearEjecutivo(request):	
 	if request.method == 'GET':
@@ -39,14 +41,14 @@ def UpdateEjecutivo(request, ejecutivoID):
 
 def crearCliente(request):	
 	if request.method == 'GET':
-		form = clienteForm()
+		form1 = clienteForm()
 	else:
-		form = clienteForm(request.POST)
-		if form.is_valid():			
-			client = form.save()
+		form1 = clienteForm(request.POST)
+		if form1.is_valid():			
+			client = form1.save()
 			return redirect('crearBeneficiario',client.idCliente)
 		return redirect('registrarCliente')
-	return render(request, 'clientes/registrarCliente.html', {'form':form})
+	return render(request, "clientes/registrarCliente.html", {'form': form1})
 
 def ListCliente(request):
 	if request.method =='GET':
@@ -77,6 +79,84 @@ def crearBeneficiario(request, idCliente):
 			obj3 = form.save(commit=False)
 			obj3.clienteBeneficiario = cliente.objects.get(pk=idCliente)
 			form.save()
-		return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
+			return redirect('crearBeneficiario2',idCliente)
 	return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
+
+def crearBeneficiario2(request, idCliente):	
+	if request.method == 'GET':
+		form = beneficiariosForm()
+	else:
+		form = beneficiariosForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.clienteBeneficiario = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('crearReferencias',idCliente)
+	return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
+
+def crearReferencias(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente3 = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('crearReferencias2',idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
+
+def inicioSesion(request):
+	return render(request,'inicioSesion/inicioSesion.html',{
+		'inicio' : UserCreationForm
+	})
+
+def crearReferencias2(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente3 = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('crearReferencias3',idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
+
+def crearReferencias3(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente3 = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('crearReferencias4',idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
+
+def crearReferencias4(request, idCliente):	
+	if request.method == 'GET':
+		form = refereciasForm()
+	else:
+		form = refereciasForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente3 = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('crearTrabajo', idCliente)
+	return render(request, 'referencias/registrarReferencia.html', {'form':form})
+
+
+def crearTrabajo(request, idCliente):	
+	if request.method == 'GET':
+		form = trabajosForm()
+	else:
+		form = trabajosForm(request.POST)
+		if form.is_valid():		
+			obj3 = form.save(commit=False)
+			obj3.cliente_idCliente = cliente.objects.get(pk=idCliente)
+			form.save()
+			return redirect('verCliente')
+	return render(request, 'trabajos/registrarTrabajo.html', {'form':form})
 

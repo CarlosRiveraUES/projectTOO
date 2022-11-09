@@ -75,3 +75,35 @@ class beneficiariosForm(forms.ModelForm):
           'parenscoBeneficiario': forms.Select(attrs={'class': 'form-control'}),
           'porcentajeBeneficiario': forms.TextInput(attrs={'class': 'form-control'})
         }
+
+class refereciasForm(forms.ModelForm):
+    class Meta:
+        model = referencias
+        fields = ['nombreReferencia', 'telReferencia', 'correoReferencia', 'tipoReferencia']
+        labels = {
+            'nombreReferencia': 'Nombre:',
+            'telReferencia': 'Telefono:',
+            'correoReferencia': 'Correo Referencia:',
+            'tipoReferencia': 'Tipo de Referenca:',
+        }
+        widgets = {
+          'nombreReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'telReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'correoReferencia': forms.TextInput(attrs={'class': 'form-control'}),
+          'tipoReferencia': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+class trabajosForm(forms.ModelForm):
+    class Meta:
+        model = trabajo
+        fields = ['capacidadPago', 'catalogoProfesiones_idcatalogoProfesiones', 'tipoActEconomica_idTipoActEconomica']
+        labels = {
+            'capacidadPago': 'Capacidad de pago:',
+            'catalogoProfesiones_idcatalogoProfesiones': 'Profesion:',
+            'tipoActEconomica_idTipoActEconomica': 'Actividad economica:',
+        }
+        widgets = {
+          'capacidadPago': forms.TextInput(attrs={'class': 'form-control'}),
+          'catalogoProfesiones_idcatalogoProfesiones': forms.Select(attrs={'class': 'form-control'}),
+          'tipoActEconomica_idTipoActEconomica': forms.Select(attrs={'class': 'form-control'}),
+        }
