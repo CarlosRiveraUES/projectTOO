@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'gestionAsociados.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'gestionAsociados3',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+    # Base de datos original
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'gestionAsociados',
-    #     'USER': 'root',
-    #     'PASSWORD': '1234',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3306',
+    #     'USER':'admin',
+    #     'PASSWORD':'12345',
+    #     'HOST':'localhost',
+    #     'PORT':'3306',
     # }
-    # Base de datos original
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gestionAsociados',
-        'USER':'admin',
-        'PASSWORD':'12345',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
 }
 
 # Password validation

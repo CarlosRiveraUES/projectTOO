@@ -4,6 +4,8 @@ from django.urls import reverse_lazy, reverse
 from registroAsociado.forms import *
 from django.views.generic import ListView, CreateView
 from datetime import datetime
+from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
 def crearEjecutivo(request):	
 	if request.method == 'GET':
@@ -80,3 +82,7 @@ def crearBeneficiario(request, idCliente):
 		return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
 	return render(request, 'beneficiarios/registrarBeneficiario.html', {'form':form})
 
+def inicioSesion(request):
+	return render(request,'inicioSesion/inicioSesion.html',{
+		'inicio' : UserCreationForm
+	})
